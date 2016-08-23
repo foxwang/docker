@@ -5,7 +5,7 @@ set -e
 (
 	export TZ=UTC # make sure our "date" variables are UTC-based
 
-	source "$(dirname "$BASH_SOURCE")/.integration-daemon-start"
+	#source "$(dirname "$BASH_SOURCE")/.integration-daemon-start"
 
 	# TODO consider using frozen images for the dockercore/builder-rpm tags
 
@@ -79,7 +79,8 @@ set -e
 
 		mkdir -p "$DEST/$version"
 		cat > "$DEST/$version/Dockerfile.build" <<-EOF
-			FROM $image
+			#FROM $image
+			FROM centos7-rpm
 			COPY . /usr/src/${rpmName}
 		EOF
 		if [ "$DOCKER_EXPERIMENTAL" ]; then
@@ -120,5 +121,5 @@ set -e
 		docker rmi "$tempImage"
 	done
 
-	source "$(dirname "$BASH_SOURCE")/.integration-daemon-stop"
+	#source "$(dirname "$BASH_SOURCE")/.integration-daemon-stop"
 ) 2>&1 | tee -a $DEST/test.log
