@@ -6,6 +6,8 @@ set -e
 	export TZ=UTC # make sure our "date" variables are UTC-based
 
 	#source "$(dirname "$BASH_SOURCE")/.integration-daemon-start"
+	DEST="bundles/1.10.3/dynbinary"
+    VERSION=$(cat VERSION)
 
 	# TODO consider using frozen images for the dockercore/builder-rpm tags
 
