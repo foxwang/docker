@@ -81,8 +81,12 @@ set -e
 	for dir in contrib/builder/rpm/*/; do
 		version="$(basename "$dir")"
 		suite="${version##*-}"
+		if [ "$version" != "centos-7" ];then
+                   echo "$version not centos7"
+                   continue
+        fi
 
-		image="dockercore/builder-rpm:$version"
+		image="centos7-rpm"
 		if ! docker inspect "$image" &> /dev/null; then
 			( set -x && docker build ${DOCKER_BUILD_ARGS} -t "$image" "$dir" )
 		fi
