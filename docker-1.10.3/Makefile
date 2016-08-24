@@ -88,7 +88,7 @@ docs:
 	$(MAKE) -C docs docs
 
 rpm:
-	hack/make.sh build-rpm
+	sh hack/make/build-rpm
 
 shell: build
 	$(DOCKER_RUN_DOCKER) bash
