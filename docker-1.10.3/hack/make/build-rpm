@@ -50,6 +50,14 @@ set -e
 	rpmDate="$(date +'%a %b %d %Y')"
 
 	# if go-md2man is available, pre-generate the man pages
+	set -x \
+	&& export GOPATH="$(mktemp -d)" \
+	&& git clone --depth 1 -b v1.0.4 https://github.com/cpuguy83/go-md2man.git "$GOPATH/src/github.com/cpuguy83/go-md2man" \
+	&& git clone --depth 1 -b v1.4 https://github.com/russross/blackfriday.git "$GOPATH/src/github.com/russross/blackfriday" \
+	&& go get -v -d github.com/cpuguy83/go-md2man \
+	&& go build -v -o /usr/local/bin/go-md2man github.com/cpuguy83/go-md2man \
+	&& rm -rf "$GOPATH"
+    chmod +x ./man/md2man-all.sh
 	./man/md2man-all.sh -q || true
 	# TODO decide if it's worth getting go-md2man in _each_ builder environment to avoid this
 
