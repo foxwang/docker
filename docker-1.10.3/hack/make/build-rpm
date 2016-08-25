@@ -57,7 +57,7 @@ set -e
 	#&& git clone --depth 1 -b v1.0.4 https://github.com/cpuguy83/go-md2man.git "$GOPATH/src/github.com/cpuguy83/go-md2man" \
 	#&& git clone --depth 1 -b v1.4 https://github.com/russross/blackfriday.git "$GOPATH/src/github.com/russross/blackfriday" \
 	#&& go get -v -d github.com/cpuguy83/go-md2man \
-	tar -zxvf ./hack/make/.build-rpm/go-md2man.src.tar -C "$GOPATH"
+	&& tar -zxvf ./hack/make/.build-rpm/go-md2man.src.tar -C "$GOPATH" \
 	&& go build -v -o /usr/local/bin/go-md2man github.com/cpuguy83/go-md2man \
 	&& rm -rf "$GOPATH"
     chmod +x ./man/md2man-all.sh
